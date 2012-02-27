@@ -1,0 +1,20 @@
+#flash {
+	background-color:#fcd209;
+	border-style:none;
+}
+
+#error {
+}
+
+#navigation {
+	height:20px;
+}
+
+#navigation ul{
+	list-style-type:none;
+}
+
+#navigation ul li {
+	float:left; 
+	padding-right:10px;
+}
