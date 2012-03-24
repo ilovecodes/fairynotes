@@ -10,6 +10,7 @@
 				{/if}
 				<li><a href="{$new_post['link']}">{$new_post['label']}</a></li>
 				<li><a href="{$username['link']}">{$username['label']}</a></li>
+				<li><a href="{$dashboard['link']}">{$dashboard['label']}</a></li>
 			{else}
 				<li><a href="{$login['link']}" class="signin"><span>{$login['label']}</span></a></li>
 			{/if}

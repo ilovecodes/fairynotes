@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-01-16 17:55:39
+<?php /* Smarty version Smarty-3.1.7, created on 2012-03-16 00:48:35
          compiled from "application/views\themes\kiuch\auth\pages\users\manage.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:45084f14526f5cbe98-79854961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0be208a26111814fa790df869a5de2c350f8dd96' => 
     array (
       0 => 'application/views\\themes\\kiuch\\auth\\pages\\users\\manage.tpl',
-      1 => 1326732931,
+      1 => 1328065830,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_4f14527013705')) {function content_4f14527013705($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'C:\\xampp\\htdocs\\ci\\application\\libraries\\smarty\\libs_3.1.7\\plugins\\function.counter.php';
+<?php if ($_valid && !is_callable('content_4f14527013705')) {function content_4f14527013705($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'C:\\xampp\\htdocs\\ftcms2\\application\\libraries\\smarty\\libs_3.1.7\\plugins\\function.counter.php';
 ?><?php echo smarty_function_counter(array('start'=>0,'skip'=>1,'print'=>false,'assign'=>'count'),$_smarty_tpl);?>
 
 <div id="content">

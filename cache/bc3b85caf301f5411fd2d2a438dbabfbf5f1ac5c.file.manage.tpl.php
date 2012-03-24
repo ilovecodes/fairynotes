@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-01-15 05:05:37
+<?php /* Smarty version Smarty-3.1.7, created on 2012-03-16 00:48:30
          compiled from "application/views\themes\kiuch\admin\manage.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:153704f124fad01a714-45477428%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'bc3b85caf301f5411fd2d2a438dbabfbf5f1ac5c' => 
     array (
       0 => 'application/views\\themes\\kiuch\\admin\\manage.tpl',
-      1 => 1326600291,
+      1 => 1328065816,
       2 => 'file',
     ),
   ),

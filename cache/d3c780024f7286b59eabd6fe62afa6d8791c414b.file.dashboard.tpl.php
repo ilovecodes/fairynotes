@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-01-16 16:46:03
+<?php /* Smarty version Smarty-3.1.7, created on 2012-03-22 14:15:02
          compiled from "application/views\themes\nodame\users\dashboard.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:136664f0f63448cece4-51564978%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd3c780024f7286b59eabd6fe62afa6d8791c414b' => 
     array (
       0 => 'application/views\\themes\\nodame\\users\\dashboard.tpl',
-      1 => 1326728759,
+      1 => 1332422100,
       2 => 'file',
     ),
   ),
@@ -19,68 +19,71 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_4f0f6344ca962',
   'variables' => 
   array (
-    'edit_profile' => 0,
-    'new_post' => 0,
-    'empty_posts' => 0,
-    'no_post_message' => 0,
-    'count' => 0,
+    'counter' => 0,
+    'form' => 0,
     'posts' => 0,
     'post' => 0,
+    'approve' => 0,
+    'hide' => 0,
+    'delete' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_4f0f6344ca962')) {function content_4f0f6344ca962($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'C:\\xampp\\htdocs\\ci\\application\\libraries\\smarty\\libs_3.1.7\\plugins\\function.counter.php';
+<?php if ($_valid && !is_callable('content_4f0f6344ca962')) {function content_4f0f6344ca962($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'C:\\xampp\\htdocs\\ftcmsinstaller\\application\\libraries\\smarty\\libs_3.1.7\\plugins\\function.counter.php';
 ?><?php echo smarty_function_counter(array('start'=>0,'skip'=>1,'print'=>false,'assign'=>'count'),$_smarty_tpl);?>
 
-<div id="art-Post">
-	<br/>
-	<h1>My Posts</h2>
-	<span><a href="<?php echo $_smarty_tpl->tpl_vars['edit_profile']->value['link'];?>
-"><?php echo $_smarty_tpl->tpl_vars['edit_profile']->value['label'];?>
-</a></span>
-	<br/>
-	<span><a href="<?php echo $_smarty_tpl->tpl_vars['new_post']->value['link'];?>
-"><?php echo $_smarty_tpl->tpl_vars['new_post']->value['label'];?>
-</a></span>
-	<?php if ($_smarty_tpl->tpl_vars['empty_posts']->value){?>
-		<?php echo $_smarty_tpl->tpl_vars['no_post_message']->value;?>
+<?php echo smarty_function_counter(array('start'=>0,'skip'=>1,'assign'=>'counter','print'=>false),$_smarty_tpl);?>
 
-	<?php }else{ ?>
-		<table>
-			<?php echo smarty_function_counter(array(),$_smarty_tpl);?>
+<div id="content">
+<table>
+	
+	<tr class="table_row_<?php echo $_smarty_tpl->tpl_vars['counter']->value%2+1;?>
+">
+	<?php echo smarty_function_counter(array(),$_smarty_tpl);?>
 
-			<tr class="table_row_<?php echo $_smarty_tpl->tpl_vars['count']->value%2+1;?>
-"><th>Title</th>
-			<th>Date Created</th>
-			<th>Status</th>
-			<th></th>
-			<th>Post Actions</th>
-			<th></th></tr>
-				<?php  $_smarty_tpl->tpl_vars['post'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['post']->_loop = false;
+		<th></th>
+		<th>Title</th>
+		<th>Status</th>
+		<th>Date Created</th>
+		<th>Date Updated</th>
+		<th>Edit</th>
+		<th>Actions</th>
+	</tr>
+	<?php echo $_smarty_tpl->tpl_vars['form']->value;?>
+
+	
+		<?php  $_smarty_tpl->tpl_vars['post'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['post']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['posts']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['post']->key => $_smarty_tpl->tpl_vars['post']->value){
 $_smarty_tpl->tpl_vars['post']->_loop = true;
 ?>
-					<?php echo smarty_function_counter(array(),$_smarty_tpl);?>
-
-					<tr class="table_row_<?php echo $_smarty_tpl->tpl_vars['count']->value%2+1;?>
+			<tr class="table_row_<?php echo $_smarty_tpl->tpl_vars['counter']->value%2+1;?>
 ">
-						<td><?php echo $_smarty_tpl->tpl_vars['post']->value['title'];?>
+				<?php echo smarty_function_counter(array(),$_smarty_tpl);?>
+
+				<td><?php echo $_smarty_tpl->tpl_vars['post']->value['checkbox'];?>
 </td>
-						<td><?php echo $_smarty_tpl->tpl_vars['post']->value['date_created'];?>
+				<td><?php echo $_smarty_tpl->tpl_vars['post']->value['title'];?>
 </td>
-						<td><?php echo $_smarty_tpl->tpl_vars['post']->value['status'];?>
+				<td><?php echo $_smarty_tpl->tpl_vars['post']->value['status'];?>
 </td>
-						<td><?php echo $_smarty_tpl->tpl_vars['post']->value['view_link'];?>
+				<td><?php echo $_smarty_tpl->tpl_vars['post']->value['date_created'];?>
 </td>
-						<td><?php echo $_smarty_tpl->tpl_vars['post']->value['edit_link'];?>
+				<td><?php echo $_smarty_tpl->tpl_vars['post']->value['date_updated'];?>
 </td>
-						<td><a href="javascript:void(0);" class="delete" 
-						       rel="<?php echo $_smarty_tpl->tpl_vars['post']->value['delete_link'];?>
+				<td><?php echo $_smarty_tpl->tpl_vars['post']->value['edit_link'];?>
+</td>
+				<td><a href="javascript:void(0);" class="delete" 
+						rel="<?php echo $_smarty_tpl->tpl_vars['post']->value['delete_link'];?>
 ">Delete</a></td>
-					</tr>
-				<?php } ?>
-		</table>
-	<br/>
-	<?php }?>
-</div><?php }} ?>
+			</tr>
+		<?php } ?>
+</table>
+	<?php echo $_smarty_tpl->tpl_vars['approve']->value;?>
+
+	<?php echo $_smarty_tpl->tpl_vars['hide']->value;?>
+
+	<?php echo $_smarty_tpl->tpl_vars['delete']->value;?>
+
+</div>
+<?php }} ?>

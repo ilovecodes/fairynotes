@@ -7,7 +7,7 @@
 		}
 		
 		public function configure() {
-			$form = load_edit_theme_form();
+			$form = load_edit_theme_form(fb_enabled(),'themes/update_theme');
 			$this -> mysmarty -> assign('form',$form);
 			load_views(array('themes/edit'));
 		}
@@ -16,6 +16,12 @@
 			current_user() -> set_user_theme($this -> input -> post('theme'));
 			$this -> session -> set_flashdata('notice',get_theme_name()." theme has been selected.");
 			redirect('themes/configure');
+		}
+		
+		public function choose_own_theme() {
+			$form = load_edit_theme_form(fb_enabled());
+			$this -> mysmarty -> assign('form',$form);
+			load_views(array('themes/edit'));
 		}
 	}
 ?>

@@ -3,11 +3,12 @@
 		
 		//var $default_theme = 'nodame';
 		var $has_many = array('user');
+		
 		public function get_all_themes($order_by = 'id', $order = 'asc') {
 			return $this -> order_by($order_by, $order) -> get();
 		}
 		
-		public static function get_default_theme() {
+		/*public static function get_default_theme() {
 			return 'nodame';
 		}
 		

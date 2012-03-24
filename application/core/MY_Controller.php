@@ -17,14 +17,20 @@ class Application extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		
 		log_message('debug', 'Application Loaded');
-
 		$this->load->library(array('form_validation', 'ag_auth','mysmarty'));
 		$this->load->helper(array('url', 'email', 'ag_auth','view'));
 		$this->config->load('ag_auth');
+		$this -> check_if_first_time();
 	}
 
+	private function check_if_first_time() {
+		$user = new User();
+		if($user -> count_admins() == 0) {
+			$this -> session -> set_userdata('first_time_user', TRUE);
+			$this -> register();
+		}
+	}
 	
 	public function field_exists($value)
 	{
@@ -42,12 +48,13 @@ class Application extends CI_Controller
 		{			
 			return TRUE;
 			
-		} // if($this->field_exists($value) === TRUE)
+		} 
 		
-	} // public function field_exists($value)
+	}
 	
 	public function register()
 	{
+		if((logged_in() && current_user() -> get_role() == 'admin') OR (!logged_in())) { //only admins and anonymous users can register
 		$this->form_validation->set_rules('username', 'Username', 
 		                                  'required|min_length[6]|callback_field_exists');
 		$this->form_validation->set_rules('password', 'Password', 
@@ -88,7 +95,7 @@ class Application extends CI_Controller
 
 			if($this->ag_auth->register($username, $password, $email) === TRUE)
 			{
-				//$data['message'] = "The user account has now been created.";
+				
 				/* Create author */
 					$user = new User();
 					$user -> where('username', $username)->get();
@@ -97,12 +104,27 @@ class Application extends CI_Controller
 					$author -> last_name = "last_name";
 					$author -> save($user);
 				/* End Create Author */
-				//$this->ag_auth->view('message', $data);
+				
 					$this -> session -> set_flashdata('notice',
 					                                  "The user account has now been created.");
-					redirect('users/manage');
+					
+					$current_user = current_user();
+					$current_user_role = $current_user -> get_role();
+					
+					if(!$current_user -> equals($user)) {	
+						echo "goes to admin edit users page";
+						redirect('users/manage');
+					} else {
+						echo "does not go to admin edit users page.";
+						$user = $this -> user -> get_user($username);
+						$this -> ag_auth -> login_user(array('username' => $user -> username,
+														'group_id' => $user -> group_id,
+														'fb_enabled' => 'disabled'));
+						$this -> session -> unset_userdata('first_time_user');
+						redirect('welcome/viewdashboard');
+					}
 				
-			} // if($this->ag_auth->register($username, $password, $email) === TRUE)
+			}
 			else
 			{
 				$data['message'] = "The user account has not been created.";
@@ -111,7 +133,9 @@ class Application extends CI_Controller
 			}
 
 		} // if($this->form_validation->run() == FALSE)
-		
+	} else {
+		redirect('welcome/index');
+	}
 	} // public function register()
 	
 	
@@ -183,6 +207,18 @@ class Application extends CI_Controller
 	public function logout()
 	{
 		$this->ag_auth->logout();
+	}
+	
+	private function db_exists() {
+		$database = $this -> db -> database;
+		$db_exists = !empty($database);
+		return $db_exists;
+	}
+	
+	private function check_db() {
+		if(!$this -> db_exists()) {
+			redirect('installer');
+		}
 	}
 }
 

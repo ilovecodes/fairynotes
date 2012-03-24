@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-01-16 17:34:45
+<?php /* Smarty version Smarty-3.1.7, created on 2012-03-06 05:56:08
          compiled from "application/views\themes\kiuch\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:265454f0b033ce98ec4-71969339%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7f1fc2bd044cf63e055603f56e7f9cd66d0eba70' => 
     array (
       0 => 'application/views\\themes\\kiuch\\header.tpl',
-      1 => 1326731682,
+      1 => 1329434408,
       2 => 'file',
     ),
   ),
@@ -30,10 +30,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 css/kiuch/style.css" />
 		<link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 css/kiuch/jquery-ui/jquery-ui-1.8.17.custom.css" type="text/css" media="screen" />
-    	<script type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-js/jquery.js"></script>
-    	<script type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-js/jqueryui.js"></script>
+    	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
     	<script type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 js/effects.js"></script>
 		<script type="text/javascript">

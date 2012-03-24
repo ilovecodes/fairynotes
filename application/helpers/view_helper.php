@@ -59,7 +59,7 @@
 	
 	function get_theme_name() {
 		if(current_user() -> exists()) { 
-			return current_user() -> get_user_theme();
+			return current_user() -> get_user_theme(fb_enabled());
 		} else {
 			//return Theme :: get_default_theme();
 			return 'nodame';

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-01-16 05:21:32
+<?php /* Smarty version Smarty-3.1.7, created on 2012-03-20 14:39:10
          compiled from "application/views\themes\nodame\posts\new.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:223024f0f67a1353447-13008555%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'fcd8d9976b728abdb5e38a557deccfa3c9df1ab3' => 
     array (
       0 => 'application/views\\themes\\nodame\\posts\\new.tpl',
-      1 => 1326687689,
+      1 => 1328065825,
       2 => 'file',
     ),
   ),

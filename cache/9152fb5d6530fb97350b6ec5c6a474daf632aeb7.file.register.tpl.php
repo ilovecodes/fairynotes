@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-01-16 17:01:30
+<?php /* Smarty version Smarty-3.1.7, created on 2012-03-16 21:09:08
          compiled from "application/views\themes\nodame\auth\pages\register.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:272634f1449da5d9cc2-74740365%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9152fb5d6530fb97350b6ec5c6a474daf632aeb7' => 
     array (
       0 => 'application/views\\themes\\nodame\\auth\\pages\\register.tpl',
-      1 => 1325516459,
+      1 => 1328065825,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_4f1449da9abe6',
   'variables' => 
   array (
     'username_empty' => 0,
@@ -28,8 +30,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'email_error' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_4f1449da9abe6',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_4f1449da9abe6')) {function content_4f1449da9abe6($_smarty_tpl) {?><div id="container">
 	<div id="login">

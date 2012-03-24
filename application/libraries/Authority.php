@@ -29,7 +29,7 @@ class Authority extends Authority\Ability {
 		Authority :: action_alias('manage', array('manage','view','create', 'read', 'update', 'delete', 'hide', 'approve', 'edit'));
 		
 		
-		if(empty($user -> username)) {
+		if(!$user -> exists()) {
 			
 			Authority :: allow('view', 'Post', function($post) {
 				return $post -> is_displayed == 1;
@@ -49,12 +49,16 @@ class Authority extends Authority\Ability {
 			Authority :: allow('hide', 'Post');
 			
 			Authority :: deny('delete', 'Post', function ($post) use ($user) {
-                return $post -> author_id != $user -> author -> get() -> id;
-            });
+					return $post -> author_id != $user -> author -> get() -> id;
+			});
 			
 			Authority :: deny('edit', 'Post', function ($post) use ($user) {
-                return $post -> author_id != $user -> author -> get() -> id;
-            });
+				return $post -> author_id != $user -> author -> get() -> id;
+			});
+			
+			Authority :: allow('edit', 'Author', function($author) use ($user) {
+				return $user -> equals($author -> user -> get());
+			});
 			
             Authority :: allow('view', 'Post');
             
@@ -66,10 +70,18 @@ class Authority extends Authority\Ability {
 		
 		if($user -> get_role() == 'user') {
 			Authority::allow('manage', 'Post', function ($post) use ($user){
-				return $post -> author_id == $user -> author -> get() -> id;
+				return $post -> author -> get() -> id == $user -> author -> get() -> id;
 			});
 			
+			Authority::allow('edit', 'Post', function ($post) use ($user){
+				return is_object($post) ? $post -> author -> get() -> id 
+				       == $user -> author -> get() -> id : 
+					   $post['author_name'] == $user -> author -> get() -> get_full_name();
+			});
 			
+			Authority::allow('delete', 'Post', function ($post) use ($user){
+				return $post -> author -> get() -> id == $user -> author -> get() -> id;
+			});
 			
 			Authority :: deny('view', 'Post', function ($post) {
 				$not_for_display = $post -> is_displayed == 0;

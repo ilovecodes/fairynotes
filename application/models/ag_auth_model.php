@@ -40,9 +40,15 @@ class AG_Auth_model extends CI_Model
 	
 	public function register($username, $password, $email)
 	{
+		$default_group_id = '100';
+		
+		if($this -> session -> userdata('first_time_user')) {
+			$default_group_id = '1';
+		}
+		
 		if($this->db->set('username', $username)->
 		    set('password', $password)->set('email', $email)->
-			set('group_id', '100')->
+			set('group_id', $default_group_id)->
 			insert($this->user_table))
 		{
 			return TRUE;

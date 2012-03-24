@@ -101,11 +101,11 @@
 		}
 		
 		public function test_user() {
+			$this -> load -> model('Facebook_user','FBuser');
 			$user = new User();
 			$user -> where('id', 1) -> get();
-			var_dump($user -> set_user_theme(1));
-			var_dump($user -> get_user_theme());
-			var_dump(get_theme_name());
+			$user_data = $this -> FBuser -> get_profile_details($user);
+			var_dump($user_data);
 		}
 		
 	}

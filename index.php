@@ -1,5 +1,10 @@
 <?php
 
+//Check if database is configured
+	if(!file_exists('application/config/database.php')) {
+		header('Location: '.rtrim($_SERVER['REQUEST_URI'], '/').'/installation/');
+		exit;
+	}
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

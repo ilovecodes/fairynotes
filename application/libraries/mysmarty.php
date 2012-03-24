@@ -14,7 +14,7 @@
 			$this->right_delimiter	=  '}';			
 
 			// absolute path prevents "template not found" errors
-			$this->template_dir = 'application/views';//(!empty($config['smarty_template_dir']) ? $config['smarty_template_dir'] : BASEPATH . 'application/views/');																		
+			$this->template_dir = 'application/views'; //(!empty($config['smarty_template_dir']) ? $config['smarty_template_dir'] : BASEPATH . 'installation/views/');																		
 
 			$this->compile_dir  = 'cache';//(!empty($config['smarty_compile_dir']) ? $config['compile_dir'] : BASEPATH . 'cache/'); //use CI's cache folder
 		}

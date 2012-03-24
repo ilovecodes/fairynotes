@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-01-16 14:40:35
+<?php /* Smarty version Smarty-3.1.7, created on 2012-03-06 05:55:10
          compiled from "application/views\themes\nodame\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:80084f0f053aea1e06-46364900%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '769d13c71e7a2badaf3815591895a262a4aefa17' => 
     array (
       0 => 'application/views\\themes\\nodame\\header.tpl',
-      1 => 1326721106,
+      1 => 1329436936,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'base_url' => 0,
+    'fb_enabled' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -35,21 +36,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <title>Fairy Tail CMS</title>
 	<link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 css/nodame/style.css" type="text/css" media="screen" />
+	<?php if ($_smarty_tpl->tpl_vars['fb_enabled']->value=='enabled'){?>
+		<!--<link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
+css/facebook.css" type="text/css" media="screen" />-->
+	<?php }?>
 	<link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 css/nodame/jquery-ui/jquery-ui-1.8.17.custom.css" type="text/css" media="screen" />
-    <script type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-js/jquery.js"></script>
-    <script type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
-js/jqueryui.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<?php echo $_smarty_tpl->tpl_vars['base_url']->value;?>
 js/effects.js"></script>
+    
     <!--<script type="text/javascript" src="script.js"></script>-->
-    
-    
     <!--[if IE 6]><link rel="stylesheet" href="style.ie6.css" type="text/css" media="screen" /><![endif]-->
     <!--[if IE 7]><link rel="stylesheet" href="style.ie7.css" type="text/css" media="screen" /><![endif]-->
 </head>
 <body>
+<div id="fb-root"></div>
+<div id="fb-div">
 <div id="dialog">
 </div>
 <div id="art-page-background-simple-gradient">

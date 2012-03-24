@@ -6,11 +6,14 @@
 		$posts_with_links = array();
 		
 		foreach($posts as $post) {
+			$post_object = new Post();
+			$post_object -> id = $post['id'];
+			$post_object -> author_id = $post['author_id'];
 			$delete = site_url('/').'posts/delete_post/'.$post['id'].'/';
 			$view_link = anchor('posts/view_post/'.$post['id'].'/', 'View');
 			$title_link = anchor('posts/view_post/'.$post['id'].'/', $post['title']);
-			$edit_link = anchor('posts/edit_post/'.$post['id'].'/', 'Edit');
-			$delete_link = $delete;
+			$edit_link = can('edit', $post_object) ? anchor('posts/edit_post/'.$post['id'].'/', 'Edit') : '';
+			$delete_link = can('delete', $post_object) ? $delete : '';
 			$post['title'] = $title_link;
 			$post['view_link'] = $view_link;
 			$post['edit_link'] = $edit_link;
@@ -115,6 +118,41 @@
 					$form_elements[] = $post;
 			}
 			return $form_elements;
+	}
+	
+	function create_user_manage_forms($author) {
+				$ci =& get_instance();
+				$ci -> load -> helper('form');
+				$form_details = array('id' => 'manage-user-posts');
+				$post_form = form_open('/posts/do_post_action/welcome-viewdashboard',$form_details);
+				$post = new Post();
+				
+				$approve = form_submit(array('name' => 'submit', 
+						                     'value' => 'Display Selected',
+											 'class' => 'submit'));
+				
+				$hide = form_submit(array('name' => 'submit', 
+						                  'value' => 'Hide Selected',
+										  'class' => 'submit'));
+				
+				$delete = form_submit(array('name' =>  'submit', 
+						                    'value' => 'Delete Selected',
+											'class' => 'submit'
+						              ));
+				
+				$posts = add_links_to_posts(create_manage_forms($post -> format_posts
+				                            ($author -> get_all_posts())));
+				                            
+				$edit_author = array('link' => site_url('/').'authors/edit_author/'.$author->id,
+				                     'label' => 'Edit Profile');         
+
+			return array('post_form' => $post_form,
+						 'approve' => $approve,
+						 'hide' => $hide,
+						 'delete' => $delete,
+						 'posts' => $posts,
+						 'edit_author' => $edit_author,
+						 'posts' => $posts);
 	}
 	
 ?>

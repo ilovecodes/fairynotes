@@ -10,7 +10,7 @@
 		<th>Status</th>
 		<th>Date Created</th>
 		<th>Date Updated</th>
-		<th></th>
+		<th>Edit</th>
 		<th>Actions</th>
 	</tr>
 	{$form}

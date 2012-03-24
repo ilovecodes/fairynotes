@@ -19,7 +19,12 @@ function username()
 
 function fb_enabled() {
 	$CI =& get_instance();
-	return $CI -> session -> userdata('fb_enabled');
+	
+	if(logged_in()) {
+		return $CI -> session -> userdata('fb_enabled');
+	} else {
+		return 'disabled';
+	}
 }
 
 function user_group($group)

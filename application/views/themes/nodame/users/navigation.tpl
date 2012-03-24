@@ -9,7 +9,11 @@
                 		
 						<li>
                 			<a href="{$new_post['link']}"><span class="l"></span><span class="r"></span><span class="t">{$new_post['label']}</span></a>
-                		</li>						
+                		</li>
+
+						<li>
+                			<a href="{$dashboard['link']}"><span class="l"></span><span class="r"></span><span class="t">{$dashboard['label']}</span></a>
+                		</li>
 						{if $is_admin}
                 		<li>
                 			<a href="{$manage['link']}"><span class="l"></span><span class="r"></span><span class="t">{$manage['label']}</span></a>

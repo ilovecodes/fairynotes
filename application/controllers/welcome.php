@@ -24,8 +24,11 @@ class Welcome extends Application {
 		$this -> load -> helper(array('date','view','pagination','posts'));
 	}
 	
-	public function index()
+	public function index() //$parameters)
 	{
+				/*$responses = array();
+				$responses['logged_in'] = TRUE;*/
+				
 	 			posts_index('welcome/index');
 				load_header();
 				load_flash();
@@ -33,76 +36,68 @@ class Welcome extends Application {
 				load_logo();
 				load_sidebar();
 				
-				if(!logged_in()) {
+				$logged_in = logged_in();
+				
+				//$logged_in = $parameters['logged_in'];
+				
+				if(!$logged_in) {
+					//$responses['logged_in'] = FALSE;
 					$this -> login();
 				}
 				
 				close_sidebar();
 				load_views(array('posts/index'),false,false,false,false,false,false);
 				load_footer();
+				
+				//return $responses;
 	}
 	
 	public function fbindex() {
 		$this -> load -> model('Facebook_user','FBuser');
 		$this -> FBuser -> login();
-		echo "went here";
-		redirect('/');
+		redirect('/welcome/viewdashboard');
 	}
 	
-	public function viewdashboard() {
-				$this -> ag_auth -> restrict('user');
-				$this -> load -> helper('form');
-				
-				$user = new User();
-				$author = current_author();
-				$name_present = $author -> get_author_full_name() != "first_name last_name"; 
-				$id = $author -> id;
-			
-				if(!$name_present) {
-					redirect('authors/edit_author/'.$id.'/');
-				}
-				
-				$form_details = array('id' => 'manage-user-posts');
-				$post_form = form_open('/posts/do_post_action/welcome-viewdashboard',$form_details);
-				$post = new Post();
-				
-				$approve = form_submit(array('name' => 'submit', 
-						                     'value' => 'Display Selected',
-											 'class' => 'submit'));
-				
-				$hide = form_submit(array('name' => 'submit', 
-						                  'value' => 'Hide Selected',
-										  'class' => 'submit'));
-				
-				$delete = form_submit(array('name' =>  'submit', 
-						                    'value' => 'Delete Selected',
-											'class' => 'submit'
-						              ));
-				
-				$posts = add_links_to_posts(create_manage_forms($post -> format_posts
-				                            ($author -> get_all_posts())));
-				                            
-				$edit_author = array('link' => site_url('/').'authors/edit_author/'.$author->id,
-				                     'label' => 'Edit Profile');            
-
-				$this -> mysmarty -> assign('edit_profile', $edit_author);
-				$this -> mysmarty -> assign('posts',$posts);
-				$this -> mysmarty -> assign('empty_posts', empty($posts));
-				$this -> mysmarty -> assign('form', $post_form);
-				$this -> mysmarty -> assign('approve', $approve);
-				$this -> mysmarty -> assign('delete', $delete);
-				$this -> mysmarty -> assign('hide', $hide);
-				
-				if(empty($posts)) {
-					$this -> mysmarty -> assign('no_post_message','You have no posts.');
-				}
-				
-				load_views(array('users/dashboard'));
+	public function viewdashboard()
 	
+	{
+		$this -> ag_auth -> restrict('user');
+		
+		//get logged in user's full name
+		$user = current_user();
+		$author = $user -> author -> get();
+		$author_name = $author -> get_author_full_name();
+		
+		
+		$no_name = ($author_name == "first_name last_name");	
+		$id = $author -> id;	
+		
+		if($no_name) {
+			redirect('authors/edit_author/'.$id.'/');  
+		} else { 
+			$author_name = $author -> get_author_full_name(); 
+			$post_form = create_user_manage_forms($author);
+				
+			$this -> mysmarty -> assign('edit_profile', $post_form['edit_author']);
+			$this -> mysmarty -> assign('posts',$post_form['posts']);
+			$this -> mysmarty -> assign('empty_posts', empty($posts));
+			$this -> mysmarty -> assign('form', $post_form['post_form']);
+			$this -> mysmarty -> assign('approve', $post_form['approve']);
+			$this -> mysmarty -> assign('delete', $post_form['delete']);
+			$this -> mysmarty -> assign('hide', $post_form['hide']);
+					
+			
+		}
+		$no_posts = empty($posts);
+					
+		if($no_posts) {
+			$this -> mysmarty -> assign('no_post_message','You have no posts.');
+		} 
+		
+		load_views(array('users/dashboard'));
 	}
 	
 	public function register() {
-		//$this -> ag_auth -> restrict('admin',TRUE);
 		parent::register();
 	}
 	
@@ -113,7 +108,7 @@ class Welcome extends Application {
 	public function access_denied() {
 		load_message('Access Denied.');
 	}
-}
 
+}
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */

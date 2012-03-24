@@ -1,11 +1,11 @@
 <?php 
-	function load_edit_theme_form() {
+	function load_edit_theme_form($fb_enabled, $submit_url) {
 		$CI =& get_instance();
 		$CI -> load -> helper('form');
 		
-		$form['open'] = form_open('themes/update_theme');
+		$form['open'] = form_open($submit_url);
 		$options = '';
-		$theme =   (fb_enabled() == 'enabled')? new Facebooktheme() : new Theme();
+		$theme =   ($fb_enabled == 'enabled')? new Facebooktheme() : new Theme();
 		$themes = $theme -> get_all_themes();
 		
 		
@@ -14,7 +14,7 @@
 		foreach($themes as $a_theme) {
 			$options[$a_theme -> id] = $a_theme -> name;
 			
-			if($a_theme -> is_selected == 1) {
+			if($a_theme -> name == current_user() -> get_user_theme($fb_enabled)) {
 				$selected_theme = $a_theme -> id;
 			}
 		}
@@ -25,4 +25,9 @@
 		
 		return $form;
 	}
+	
+	function load_edit_site_theme_form() {
+	}
+	
+	
 ?>

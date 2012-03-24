@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-01-13 08:24:18
+<?php /* Smarty version Smarty-3.1.7, created on 2012-03-06 05:55:21
          compiled from "application/views\themes\nodame\footer.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:30234f0f05c54aab58-66573454%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7830e207d2b19616c44f5a73b67550814ffddb6e' => 
     array (
       0 => 'application/views\\themes\\nodame\\footer.tpl',
-      1 => 1326439451,
+      1 => 1329013842,
       2 => 'file',
     ),
   ),
@@ -33,6 +33,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 		</div>
         <div class="cleared"></div>
         <p class="art-page-footer">Powered by <a href="http://littlepal.tumblr.com/">Littlepal</a> and <a href="http://www.twitter.com/kiuch">Kiuch Theme</a> created with Piero.</p>
+    </div>
     </div>
 </body>
 </html>

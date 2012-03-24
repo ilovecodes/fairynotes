@@ -10,38 +10,42 @@
 					'secret'=> $this->config->item('fb_secret_key'),
 					'cookie'=> TRUE
 					));
-			
+		}
+		
+		public function user_is_logged_in() {
 			
 		}
 		
-		public function login() {
-			$user = $this -> facebook -> getUser();
-			
+		public function login($parameters = array()) {
+		
+			//$user = $this -> facebook -> getUser();
+			$user = $parameters['fb_registered'];
 			if($user) { //if logged in on facebook
 				try {
 			
-					$userdata = $this -> facebook -> api('/me?fields=email,username,first_name,last_name,id', 'GET'); 
+					/*$userdata = $this -> facebook -> api('/me?fields=email,username,first_name,last_name,id', 'GET'); 
 					//retrieve user details to see if user exists in the app's db
 					$app_user = new User();
-					$app_user -> where('email', $userdata['email']) -> get();
+					$app_user -> where('email', $userdata['email']) -> get();*/
+					//$app_user_exists = $app_user -> exists();
 					
-					if($app_user -> exists()) { //if user exists, login
-						$this -> login_fb_user($app_user);
+					if($app_user) { //if user exists, login
+						//$this -> login_fb_user($app_user);
 					} else { 
 						//if user does not exist, automatically sign the user up
 						$this -> load -> helper('string');
 						$this -> load -> helper('date');
 						
-						$random_username = random_string('alnum',20);
+						$random_username = random_string('alnum',40);
 						$exists = $app_user -> where('username', $random_username) -> get() -> exists();
 						
 						while($exists) {
-							$random_username = random_string('alnum',20);	
+							$random_username = random_string('alnum',40);	
 						}
 						
-						$this -> ag_auth -> register(
-								 				random_string('alnum',20), 
-												random_string('alnum',20),
+						/*$this -> ag_auth -> register(
+								 				random_string('alnum',40), 
+												random_string('alnum',40),
 								                $userdata['email']
 								            );
 						
@@ -54,14 +58,15 @@
 								                      'user' => $app_user
 													 )
 								             );
-						$this -> login_fb_user($app_user);
+						$this -> login_fb_user($app_user);*/
 					  }
 				} catch(FacebookApiException $fb_exception) {
-					error_log($fb_exception);
+					//error_log($fb_exception);
 				  }
 				
 			} else {
-				redirect($this -> facebook -> getLoginUrl(array('scope' => 'user_about_me,email,publish_stream', 'next' => 'http://apps.facebook.com/fairynotes')));
+				/*redirect($this -> facebook -> getLoginUrl(array('scope' => 'user_about_me,email,publish_stream', */
+						                                        /*'next' => 'http://apps.facebook.com/fairynotes')*//*));*/
 			  }	
 			
 		}
@@ -79,14 +84,6 @@
 			}
 			
 			return $return_value;
-		}
-		
-		public function is_app_user() {
-			
-		}
-		
-		public function get_authorization_code() {
-			
 		}
 		
 		public function post_to_feed($options) {
@@ -121,20 +118,44 @@
 			login();
 		}
 		
-		public function get_picture_url() {
-			$uid = $this -> facebook -> getUser();
-			$link = "http://graph.facebook.com/$uid/picture";
+		public function get_picture_url($searched_user_id) {
+			$id = $searched_user_id;
+			$link = "http://graph.facebook.com/$id/picture";
+			
 			return $link;
 		}
 		
-		/*public function log_in() {
-			$user = $this -> facebook -> getUser();
+		public function get_profile_details($user) {
+			$profile_details = array();
+			$searched_user = $this -> search_user($user);
+			$profile_details['bio'] = "";
+			$profile_details['quotes'] = "";
+			$profile_details['picture_url'] = "";
 			
-			if($user) {
-				echo "Hello";
+			if(!empty($searched_user)) {
+				$profile_details['picture_url'] = $this -> get_picture_url($searched_user['id']);
+			
+			
+				if(array_key_exists('bio', $searched_user)) {
+					$profile_details['bio'] = $searched_user['bio'];
+				}
+			
+				if(array_key_exists('quotes', $searched_user)) {
+					$profile_details['quotes'] = $searched_user['quotes'];
+				}
+			
+			}
+			return $profile_details;
+		}
+		
+		public function search_user($user) {
+			$searched_user = $this -> facebook -> api("/search?q=$user->email&type=user");
+			if(!empty($searched_user['data'])) {
+				$user = $this -> facebook -> api('/'.$searched_user['data'][0]['id'].'?fields=bio,quotes,id', 'GET');
 			} else {
-				echo "<a href=\"".$this -> facebook -> getLoginUrl()."\">Login</a>";
-			  }
-		}*/
+				$user = array();
+			}
+			return $user;
+		}
 	}
 ?>

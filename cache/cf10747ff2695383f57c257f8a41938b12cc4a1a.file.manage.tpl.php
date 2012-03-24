@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-01-15 04:24:50
+<?php /* Smarty version Smarty-3.1.7, created on 2012-03-22 15:34:29
          compiled from "application/views\themes\nodame\posts\manage.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:72044f0f67b6ba9344-76534834%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cf10747ff2695383f57c257f8a41938b12cc4a1a' => 
     array (
       0 => 'application/views\\themes\\nodame\\posts\\manage.tpl',
-      1 => 1326597879,
+      1 => 1332426821,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_4f0f67b6efe53')) {function content_4f0f67b6efe53($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'C:\\xampp\\htdocs\\ci\\application\\libraries\\smarty\\libs_3.1.7\\plugins\\function.counter.php';
+<?php if ($_valid && !is_callable('content_4f0f67b6efe53')) {function content_4f0f67b6efe53($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'C:\\xampp\\htdocs\\ftcmsinstaller\\application\\libraries\\smarty\\libs_3.1.7\\plugins\\function.counter.php';
 ?><!--  <?php echo smarty_function_counter(array('start'=>0,'skip'=>1,'assign'=>'count'),$_smarty_tpl);?>
  -->
 <div id="art-Post">
@@ -42,6 +42,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 		<th>Status</th>
 		<th>Date Created</th>
 		<th>Date Updated</th>
+		<th>Edit</th>
+		<th>Delete</th>
 	</tr>
 	<?php echo $_smarty_tpl->tpl_vars['form']->value;?>
 
@@ -67,7 +69,15 @@ $_smarty_tpl->tpl_vars['form_element']->_loop = true;
 </td>
 				<td><?php echo $_smarty_tpl->tpl_vars['form_element']->value['date_updated'];?>
 </td>
-				
+				<td><?php echo $_smarty_tpl->tpl_vars['form_element']->value['edit_link'];?>
+</td>
+				<td>
+				<?php if ($_smarty_tpl->tpl_vars['form_element']->value['delete_link']!=''){?>
+					<a href="javascript:void(0);" class="delete" 
+							rel="<?php echo $_smarty_tpl->tpl_vars['form_element']->value['delete_link'];?>
+">Delete</a>
+				<?php }?>
+				</td>
 			</tr>
 		<?php } ?>
 </table>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-01-15 05:30:09
+<?php /* Smarty version Smarty-3.1.7, created on 2012-03-22 15:37:27
          compiled from "application/views\themes\kiuch\posts\manage.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:153794f0b144e86a025-01386576%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c971d2ed1dd7a3a3858967ad5b63126744e48cfd' => 
     array (
       0 => 'application/views\\themes\\kiuch\\posts\\manage.tpl',
-      1 => 1326601403,
+      1 => 1332426809,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'counter' => 0,
+    'is_admin' => 0,
     'form' => 0,
     'form_elements' => 0,
     'form_element' => 0,
@@ -28,7 +29,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_4f0b144eb8974')) {function content_4f0b144eb8974($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'C:\\xampp\\htdocs\\ci\\application\\libraries\\smarty\\libs_3.1.7\\plugins\\function.counter.php';
+<?php if ($_valid && !is_callable('content_4f0b144eb8974')) {function content_4f0b144eb8974($_smarty_tpl) {?><?php if (!is_callable('smarty_function_counter')) include 'C:\\xampp\\htdocs\\ftcmsinstaller\\application\\libraries\\smarty\\libs_3.1.7\\plugins\\function.counter.php';
 ?><?php echo smarty_function_counter(array('start'=>0,'skip'=>1,'assign'=>'counter','print'=>false),$_smarty_tpl);?>
 
 <div id="content">
@@ -40,10 +41,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 		<th></th>
 		<th>Title</th>
-		<th>Author</th>
+		
+		<?php if ($_smarty_tpl->tpl_vars['is_admin']->value){?>
+			<th>Author</th>
+		<?php }?>
+		
 		<th>Status</th>
 		<th>Date Created</th>
 		<th>Date Updated</th>
+		<th>Edit</th>
+		<th>Delete</th>
 		<!--<th>Actions</th>-->
 	</tr>
 	<?php echo $_smarty_tpl->tpl_vars['form']->value;?>
@@ -62,14 +69,25 @@ $_smarty_tpl->tpl_vars['form_element']->_loop = true;
 </td>
 				<td><?php echo $_smarty_tpl->tpl_vars['form_element']->value['title'];?>
 </td>
-				<td><?php echo $_smarty_tpl->tpl_vars['form_element']->value['author'];?>
+				<?php if ($_smarty_tpl->tpl_vars['is_admin']->value){?>
+					<td><?php echo $_smarty_tpl->tpl_vars['form_element']->value['author'];?>
  </td>
+				<?php }?>
 				<td><?php echo $_smarty_tpl->tpl_vars['form_element']->value['status'];?>
 </td>
 				<td><?php echo $_smarty_tpl->tpl_vars['form_element']->value['date_created'];?>
 </td>
 				<td><?php echo $_smarty_tpl->tpl_vars['form_element']->value['date_updated'];?>
 </td>
+				<td><?php echo $_smarty_tpl->tpl_vars['form_element']->value['edit_link'];?>
+</td>
+				<td>
+				<?php if ($_smarty_tpl->tpl_vars['form_element']->value['delete_link']!=''){?>
+					<a href="javascript:void(0);" class="delete" 
+							rel="<?php echo $_smarty_tpl->tpl_vars['form_element']->value['delete_link'];?>
+">Delete</a>
+				<?php }?>
+				</td>
 				<!--<td><?php echo $_smarty_tpl->tpl_vars['form_element']->value['view_link'];?>
 </td>-->
 			</tr>

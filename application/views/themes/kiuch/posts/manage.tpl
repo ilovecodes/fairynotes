@@ -14,6 +14,8 @@
 		<th>Status</th>
 		<th>Date Created</th>
 		<th>Date Updated</th>
+		<th>Edit</th>
+		<th>Delete</th>
 		<!--<th>Actions</th>-->
 	</tr>
 	{$form}
@@ -29,6 +31,13 @@
 				<td>{$form_element['status']}</td>
 				<td>{$form_element['date_created']}</td>
 				<td>{$form_element['date_updated']}</td>
+				<td>{$form_element['edit_link']}</td>
+				<td>
+				{if $form_element['delete_link'] != ''}
+					<a href="javascript:void(0);" class="delete" 
+							rel="{$form_element['delete_link']}">Delete</a>
+				{/if}
+				</td>
 				<!--<td>{$form_element['view_link']}</td>-->
 			</tr>
 		{/foreach}
